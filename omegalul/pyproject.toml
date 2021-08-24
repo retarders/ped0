@@ -1,6 +1,3 @@
-[eool.poedd origin git@github.com:retarders/ped0.git
-git branch -M main
-git push -u origin maintry]
 name = "omegalul"
 version = "2.0.0"
 description = ""
