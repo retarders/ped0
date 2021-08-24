@@ -1,0 +1,18 @@
+[eool.poedd origin git@github.com:retarders/ped0.git
+git branch -M main
+git push -u origin maintry]
+name = "omegalul"
+version = "2.0.0"
+description = ""
+authors = ["pcranaway"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
