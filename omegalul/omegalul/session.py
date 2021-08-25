@@ -1,3 +1,8 @@
+import requests
+import user_agent
+
+OPERATING_SYSTEMS = ['mac', 'windows', 'iphone', 'android']
+
 def create_session():
     """
     Creates a session for all the requests to be sent to Omegle in the
@@ -5,4 +10,10 @@ def create_session():
     requests such as the User Agent (since we don't want to be sending
     them from the requests.py agent)
     """
-    pass
+
+    agent = user_agent.generate_user_agent(os=OPERATING_SYSTEMS)
+    
+    session = requests.Session()
+    session.headers['User-Agent'] = agent
+
+    return session
