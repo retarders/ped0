@@ -1,7 +1,7 @@
 import requests
 
 def status(session: requests.Session):
-    return session.get('https://omegle.com/status').text
+    return session.get('https://omegle.com/status')
 
 def start(session: requests.Session, server: str, randid: str):
     return session.post('https://{}.omegle.com/start?caps=recaptcha2,t&firstevents=1&spid=&randid={}&lang=en'.format(server, randid))
