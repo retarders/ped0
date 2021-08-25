@@ -8,8 +8,6 @@ class Chat:
     A chatting session between two omegle users.
     """
 
-    id: str
-
     def __init__(self, session: requests.Session, server: str, randid: str):
         """
         Construct a new Chat object that holds a chat conversation.
@@ -24,6 +22,7 @@ class Chat:
         self.session = session
         self.server = server
         self.randid = randid
+        self.id = ''
 
     def start(self):
         """
