@@ -14,3 +14,6 @@ def send(session: requests.Session, server: str, message: str):
         'id': id,
         'msg': message
     })
+
+def disconnect(session: requests.Session, server: str):
+    return session.post('https://{}.omegle.com/disconnect'.format(server), data={'id': id})
