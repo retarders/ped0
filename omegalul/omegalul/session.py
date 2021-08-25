@@ -1,7 +1,7 @@
 import requests
 import user_agent
 
-OPERATING_SYSTEMS = ['mac', 'windows', 'iphone', 'android']
+OPERATING_SYSTEMS = ['mac', 'win']
 
 def create_session() -> requests.Session:
     """
