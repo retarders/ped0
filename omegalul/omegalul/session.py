@@ -3,7 +3,7 @@ import user_agent
 
 OPERATING_SYSTEMS = ['mac', 'windows', 'iphone', 'android']
 
-def create_session():
+def create_session() -> requests.Session:
     """
     Creates a session for all the requests to be sent to Omegle in the
     future. We use a session to persist certain settings about the
