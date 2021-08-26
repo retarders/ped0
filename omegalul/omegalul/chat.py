@@ -48,7 +48,7 @@ class Chat:
         api.typing(self.session, self.server, self.id)
 
         # this is wrong 3000% pls fix nv6
-        time.sleep(len(message.split(' ')) * (wpm / 60))
+        time.sleep((60 / wpm) * len(message.split(' ')))
 
         api.send(self.session, self.server, self.id, message)
 
@@ -67,4 +67,4 @@ class Chat:
         Stop the chat by disconnecting.
         """
 
-        api.disconnect(self.session, self.server, self.id)
+        api.disconnect(self.session, self.id, self.server)
