@@ -36,9 +36,9 @@ while True:
                     chat.stop()
                     print('Disconnected from the chat')
                     break
-            
-            chat.message(message, 0)
-            print('You: ' + message)
+            else: 
+                chat.message(message, 0)
+                print('You: ' + message)
 
     else:
         break
