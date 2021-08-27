@@ -69,6 +69,8 @@ def destroy(signum, stack):
         
         time.sleep(1)
 
+    exit()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('message', type=str, default='F15', help='First message to send (may have newlines and will be split into multiple messages)')
