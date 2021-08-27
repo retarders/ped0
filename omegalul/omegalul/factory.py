@@ -5,10 +5,11 @@ from .chat import Chat
 from . import session
 from . import randid
 from . import api
+from typing import List
 
 servers: List[str] = []
 
-def create_chat() -> Chat:
+def create_chat(topics: List[str] = []) -> Chat:
     sess = session.create_session()
 
     global servers
@@ -19,4 +20,4 @@ def create_chat() -> Chat:
 
     id = randid.generate_randid()
 
-    return Chat(sess, server, id)
+    return Chat(sess, server, id, topics=topics)

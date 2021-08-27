@@ -1,14 +1,14 @@
 import requests
-import time
 import json
 from . import api
+from typing import List
 
 class Chat:
     """
     A chatting session between two omegle users.
     """
 
-    def __init__(self, session: requests.Session, server: str, randid: str):
+    def __init__(self, session: requests.Session, server: str, randid: str, topics: List[str] = []):
         """
         Construct a new Chat object that holds a chat conversation.
 
@@ -22,6 +22,7 @@ class Chat:
         self.session = session
         self.server = server
         self.randid = randid
+        self.topics = topics
         self.id = ''
 
     def start(self):
@@ -29,7 +30,7 @@ class Chat:
         Starts the chat.
         """
 
-        response = api.start(self.session, self.server, self.randid)
+        response = api.start(self.session, self.server, self.randid, topics=self.topics)
         self.id = json.loads(response.text)['clientID']
 
         return response
