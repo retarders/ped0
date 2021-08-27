@@ -22,39 +22,47 @@ def update_db(database_path, queue):
         connection.commit()
 
 def open_chat(message):
-    chat_id = random.randint(1111111, 9999999)
-    
-    chat = omegalul.create_chat()
-    chat.start()
-    chats.append(chat)
+    while True:
+        try:
+            chat_id = random.randint(1111111, 9999999)
+            
+            chat = omegalul.create_chat()
+            chat.start()
+            chats.append(chat)
 
-    print('{}: id {}'.format(chat_id, chat.id))
+            print('{}: id {}'.format(chat_id, chat.id))
 
-    chat.message(message, wpm=20)
-    print('{}: sent {}'.format(chat_id, message))
+            chat.message(message, wpm=20)
+            print('{}: sent {}'.format(chat_id, message))
 
-    # sets different amount of seconds to sleep for for every chat
-    sleep = random.randint(1, 3)
+            # sets different amount of seconds to sleep for for every chat
+            sleep = random.randint(1, 3)
 
-    for i in range(20):
-        time.sleep(sleep)
+            for i in range(20):
+                time.sleep(sleep)
 
-        events = chat.get_events()
+                events = chat.get_events()
 
-        if events:
-            for event in events:
-                if event[0] == 'gotMessage':
-                    print('{}: received {}'.format(chat_id, event[1]))
-                    id = random.randint(1111111, 9999999)
+                if events:
+                    for event in events:
+                        if event[0] == 'gotMessage':
+                            message = event[1]
 
-                    queue.append({
-                        'id': id,
-                        'chat': chat_id,
-                        'content': event[1],
-                        'time': int(time.time())
-                    })
+                            print('{}: received {}'.format(chat_id, message))
+                            id = random.randint(1111111, 9999999)
 
-    chat.stop()
+                            queue.append({
+                                'id': id,
+                                'chat': chat_id,
+                                'content': message,
+                                'time': int(time.time())
+                            })
+
+
+            chat.stop()
+            chats.remove(chat)
+        except:
+            pass
 
 def chat_loop(message):
     while not dying:
@@ -64,6 +72,7 @@ def destroy(signum, stack):
     for i in range(4):
         print('DONT PRESS CTRL + C AGAIN DICKHEAD')
 
+    global dying
     dying = True
 
     for chat in chats:
@@ -72,7 +81,7 @@ def destroy(signum, stack):
         
         time.sleep(1)
 
-    exit()
+    exit(0)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
