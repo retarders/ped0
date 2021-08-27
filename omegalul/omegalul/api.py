@@ -9,7 +9,7 @@ def start(session: requests.Session, server: str, randid: str, topics: List[str]
     url = 'https://{}.omegle.com/start?caps=recaptcha2,t&firstevents=1&spid=&randid={}&lang=en'.format(server, randid)
 
     if topics:
-        topics += '&topics=' + json.dumps(topics)
+        url += '&topics=' + json.dumps(topics)
 
     return session.post(url)
 
