@@ -10,6 +10,7 @@ import signal
 
 queue = []
 chats = []
+dying = False
 
 def update_db(database_path, queue):
 
@@ -56,12 +57,14 @@ def open_chat(message):
     chat.stop()
 
 def chat_loop(message):
-    while True:
+    while not dying:
         open_chat(message)
 
 def destroy(signum, stack):
     for i in range(4):
         print('DONT PRESS CTRL + C AGAIN DICKHEAD')
+
+    dying = True
 
     for chat in chats:
         chat.stop()
