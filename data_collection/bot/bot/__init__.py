@@ -6,8 +6,10 @@ import sqlite3
 import threading
 import time
 import random
+import signal
 
 queue = []
+chats = []
 
 def update_db(database_path, queue):
 
@@ -23,14 +25,18 @@ def open_chat(message):
     
     chat = omegalul.create_chat()
     chat.start()
+    chats.append(chat)
 
     print('{}: id {}'.format(chat_id, chat.id))
 
     chat.message(message, wpm=20)
     print('{}: sent {}'.format(chat_id, message))
 
+    # sets different amount of seconds to sleep for for every chat
+    sleep = random.randint(1, 3)
+
     for i in range(20):
-        time.sleep(2)
+        time.sleep(sleep)
 
         events = chat.get_events()
 
@@ -53,6 +59,16 @@ def chat_loop(message):
     while True:
         open_chat(message)
 
+def destroy(signum, stack):
+    for i in range(4):
+        print('DONT PRESS CTRL + C AGAIN DICKHEAD')
+
+    for chat in chats:
+        chat.stop()
+        print('{}: stopped'.format(chat.id))
+        
+        time.sleep(1)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('message', type=str, default='F15', help='First message to send (may have newlines and will be split into multiple messages)')
@@ -64,10 +80,11 @@ if __name__ == '__main__':
     for i in range(args.chats):
         threading.Thread(target=chat_loop, args=[args.message]).start()
 
+    signal.signal(signal.SIGINT, destroy)
+
     while True:
         time.sleep(3)
 
         if not len(queue) == 0:
             update_db(args.database, queue)
             queue = []
-
