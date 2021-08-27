@@ -50,7 +50,7 @@ class Chat:
         # this is wrong 3000% pls fix nv6
         # time.sleep((60 / wpm) * len(message.split(' ')))
 
-        api.send(self.session, self.server, self.id, message)
+        return api.send(self.session, self.server, self.id, message)
 
     def get_events(self):
         """
@@ -67,4 +67,4 @@ class Chat:
         Stop the chat by disconnecting.
         """
 
-        api.disconnect(self.session, self.id, self.server)
+        return api.disconnect(self.session, self.id, self.server)
