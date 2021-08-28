@@ -1,5 +1,7 @@
 import requests
 import json
+import time
+import random
 from . import api
 from typing import List
 
@@ -50,6 +52,10 @@ class Chat:
 
         # this is wrong 3000% pls fix nv6
         # time.sleep((60 / wpm) * len(message.split(' ')))
+
+        time.sleep(random.randind(1.0, 3.5))
+
+        api.stopped_typing(self.session, self.server, self.id)
 
         return api.send(self.session, self.server, self.id, message)
 
