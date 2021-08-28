@@ -19,6 +19,9 @@ def events(session: requests.Session, server: str, id: str):
 def typing(session: requests.Session, server: str, id: str):
     return session.post('https://{}.omegle.com/typing'.format(server), data={'id': id})
 
+def stopped_typing(session: requests.Session, server: str, id: str):
+    return session.post('https://{}.omegle.com/stoppedtyping'.format(server), data={'id': id})
+
 def send(session: requests.Session, server: str, id: str, message: str):
     return session.post('https://{}.omegle.com/send'.format(server), data={
         'id': id,
